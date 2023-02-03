@@ -46,8 +46,8 @@ Antes de começar, você precisará das seguintes ferramentas:
 </br>
 
 
-- [Node.js](https://nodejs.org/en/) Versão ideal: 16.16.0.
-- [MySQL](https://www.mysql.com/) Versão ideal: 8.0.0
+- <img alt="Version NodeJS" src="https://img.shields.io/badge/NodeJs-v16-green">
+- <img alt="Version MySQL" src="https://img.shields.io/badge/MySQL-v16-blue">
 
 ## Iniciando o Projeto
 
@@ -63,8 +63,7 @@ $ cd backend
 $ npm install
 
 # Inicie a aplicação
-$ npm run app 
-$ yarn app
+$ npm run app
 
 ### Iniciando o Front End
 
@@ -79,7 +78,6 @@ $ npm install
 
 # Inicie a aplicação
 $ npm run dev
-$ yarn dev
 ```
 
 ## Configurando o Banco de Dados
