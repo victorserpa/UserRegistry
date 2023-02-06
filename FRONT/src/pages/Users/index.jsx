@@ -64,6 +64,10 @@ export default function Users() {
   }
 
 async function deleteUser(id, name) {
+  if (currentUser.id_user === id) {
+    toast.error("Você não pode excluir você mesmo.")
+    return
+  }
   if (window.confirm("Você tem certeza de que deseja excluir este usuário?")) {
     try {
       if (isAdmin || currentUser.id_user === id) {

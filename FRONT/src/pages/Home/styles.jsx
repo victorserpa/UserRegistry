@@ -7,6 +7,10 @@ export const CenteredContainer = styled.div`
   align-items: center;
   margin-top: 5rem;
   color: black;
+
+  @media (max-width: 799px) {
+    margin-top: 2rem;
+  }
 `
 
 export const Container = styled(CenteredContainer)`
@@ -38,6 +42,11 @@ export const GroupLinks = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-evenly;
+
+  @media (max-width: 799px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `
 
 export const ForgetPassword = styled.button`
@@ -66,6 +75,10 @@ export const CreateAccount = styled.button`
 export const Form = styled.form`
   width: 100%;
   margin-top: 12px;
+
+  @media (max-width: 799px) {
+    margin-top: 8px;
+  }
 `
 
 export const FormContainer = styled(CenteredContainer)`
@@ -75,7 +88,7 @@ export const FormContainer = styled(CenteredContainer)`
   width: 85%;
   height: 100%;
   background-color: white;
-  box-shadow: 1px 0px 15px -4px #000000;
+  box-shadow: 1px 0 px 15px -4px #000000;
   border-radius: 8px;
   display: ${(props) => (props.hidden ? "none" : "block")};
 

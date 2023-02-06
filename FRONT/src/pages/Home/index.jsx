@@ -87,7 +87,9 @@ export default function HomePage() {
                 required
               />
             </Field>
-            <Button type="submit">Entrar</Button>
+            <Button type="submit">
+              {submitting ? "Carregando..." : "Entrar"}
+            </Button>
           </Form>
           <GroupLinks>
             <Link to="/register">
