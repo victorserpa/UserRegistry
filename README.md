@@ -88,7 +88,7 @@ $ npm run dev
 
 - Abra o Prompt de Comando ou outro programa similar e digite `mysql -h localhost -u root -p`, pressionando enter. Será solicitada a senha "1234". Após inserir a senha, você estará dentro do MySQL.
 
-__Recomendamos executar o comando `create table cadastrodeusuarios` para criar a tabela de cadastro de usuários e evitar alterações no back-end.__
+__Recomendamos executar o comando `create database cadastrodeusuarios` para criar a tabela de cadastro de usuários e evitar alterações no back-end.__
 
 ```
 - # Acesse a pasta do backend
