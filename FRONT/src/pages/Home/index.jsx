@@ -33,7 +33,7 @@ export default function HomePage() {
 
   const redirectUsers = () => {
     if (token) {
-      window.location = "/users"
+      window.location = "/home"
     }
   }
 
@@ -47,10 +47,9 @@ export default function HomePage() {
       })
       localStorage.setItem("token", data.token)
 
-      window.location = "/users"
+      window.location = "/home"
     } catch (err) {
-      console.log(err)
-      console.log(password)
+      setSubmitting(false)
       toast.error("Login e/ou Senha incorreta!")
     }
   }

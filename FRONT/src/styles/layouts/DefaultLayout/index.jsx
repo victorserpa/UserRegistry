@@ -1,12 +1,14 @@
 import { Outlet } from 'react-router-dom'
+import Button from '../../../components/ButtonLogout'
 
-import { Header } from "../../../components/Header/index"
+import NavBar from "../../../components/Navbar"
 import { LayoutContainer } from "./styles"
 
 export function DefaultLayout() {
   return (
     <LayoutContainer>
-      <Header />
+      <NavBar />
+      <Button />
       <Outlet />
     </LayoutContainer>
   )

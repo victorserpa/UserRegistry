@@ -7,6 +7,10 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
+      profilePhoto: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       login: {
         type: Sequelize.STRING,
         unique: true,

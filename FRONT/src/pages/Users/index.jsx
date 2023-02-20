@@ -2,27 +2,28 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import axios from "axios"
 import jwtDecode from "jwt-decode"
-import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
 
 import {
   CenteredContainer,
   Heading,
-  ButtonQuit,
   Container,
   HeadingContainer,
+  Pagination,
+  Numbers,
 } from "../Users/styles"
 
 import { setIsLoading } from "../../store/actions"
 
 export default function Users() {
-  const [user, setUser] = useState([])
+  const [users, setUsers] = useState([])
+  const [page, setPage] = useState(0)
   const token = localStorage.getItem("token") || null
   const dispatch = useDispatch()
   const isLoading = useSelector((state) => state.loading)
-  const currentUser = (token) ? jwtDecode(token) : ""
-  const isAdmin = (token) ? currentUser.admin : ""
-  const name = (token) ? currentUser.name : ""
+  const currentUser = token ? jwtDecode(token) : ""
+  const isAdmin = token ? currentUser.admin : ""
+  const name = token ? currentUser.name : ""
   let toastDisplayed = false
 
   useEffect(() => {
@@ -31,7 +32,7 @@ export default function Users() {
       getAllUsers()
     }
   }, [])
-  
+
   const loaded = () => {
     dispatch(setIsLoading())
   }
@@ -42,64 +43,68 @@ export default function Users() {
       Authorization: `Bearer ${token}`,
     }
   }
-  
+
   const redirectUsers = () => {
     if (!token) {
-      window.location="/"
+      window.location = "/"
     }
   }
 
   async function getAllUsers() {
     axios
       .get("http://localhost:8081/users", { headers: getHeaders() })
-      .then((response) => setUser(response.data))
-      .catch((error) => console.log(error))
-      .finally(() => {
-        if (!toastDisplayed) {
-          toast.success(`Seja bem-vindo, ${name}`)
-          toastDisplayed = true
+      .then((response) => setUsers(response.data))
+      .catch((error) => {
+        console.log(error)
+        if (error.response.status === 401) {
+          window.location = "/"
+          localStorage.removeItem("token")
         }
+      })
+      .finally(() => {
         loaded()
       })
   }
 
-async function deleteUser(id, name) {
-  if (currentUser.id_user === id) {
-    toast.error("Você não pode excluir você mesmo.")
-    return
-  }
-  if (window.confirm("Você tem certeza de que deseja excluir este usuário?")) {
-    try {
-      if (isAdmin || currentUser.id_user === id) {
-        await axios.delete(`http://localhost:8081/users/${id}`, {
-          headers: getHeaders(),
-        })
-        axios
-          .get("http://localhost:8081/users", { headers: getHeaders() })
-          .then((response) => {
-            setUser(response.data)
-            toast.success(`Usuário excluído com sucesso!`)
-          })
-          .catch((error) => {
-            console.log(error)
-            toast.error("Erro ao excluir o usuário, por favor tente novamente.")
-          })
-      } else {
-        toast.error("Você não tem permissão para excluir este usuário.")
-      }
-    } catch (error) {
-      console.log(error)
-      toast.error("Erro ao excluir o usuário, por favor tente novamente.")
-    }
-  }
-}
+  const numPages = Math.ceil(users.length / 5)
+  const pageRange = Array.from({ length: numPages }, (_, i) => i)
 
-  function logout() {
-    if (window.confirm("Você tem certeza de que deseja sair?")) {
-      localStorage.removeItem("token")
-      location.assign("/")
+  async function deleteUser(id, name) {
+    if (currentUser.id_user === id) {
+      toast.error("Você não pode excluir você mesmo.")
+      return
+    }
+    if (
+      window.confirm("Você tem certeza de que deseja excluir este usuário?")
+    ) {
+      try {
+        if (isAdmin || currentUser.id_user === id) {
+          await axios.delete(`http://localhost:8081/users/${id}`, {
+            headers: getHeaders(),
+          })
+          axios
+            .get("http://localhost:8081/users", { headers: getHeaders() })
+            .then((response) => {
+              setUser(response.data)
+              toast.success(`Usuário excluído com sucesso!`)
+            })
+            .catch((error) => {
+              console.log(error)
+              toast.error(
+                "Erro ao excluir o usuário, por favor tente novamente."
+              )
+            })
+        } else {
+          toast.error("Você não tem permissão para excluir este usuário.")
+        }
+      } catch (error) {
+        console.log(error)
+        toast.error("Erro ao excluir o usuário, por favor tente novamente.")
+      }
     }
   }
+
+
 
   return (
     <>
@@ -107,25 +112,19 @@ async function deleteUser(id, name) {
         <CenteredContainer small>
           <HeadingContainer>
             <Heading>Usuários cadastrados</Heading>
-            <Link onClick={logout}>
-              <ButtonQuit>
-                <span>Sair</span>
-              </ButtonQuit>
-            </Link>
+            
           </HeadingContainer>
           <Container>
             <tbody>
               <tr>
-                <td id="header">
-                  Nome do usuário
-                </td>
+                <td id="header">Nome do usuário</td>
                 <th id="header">Login</th>
                 <th id="header">E-mail</th>
                 <th id="header">Telefone</th>
                 <th id="header">Apagar usuário</th>
               </tr>
-              {user && user.length > 0 ? (
-                user.map((user) => {
+              {users.length > 0 &&
+                users.slice(page * 5, (page + 1) * 5).map((user) => {
                   if (
                     isAdmin === true ||
                     currentUser.id_user === user.id_user
@@ -149,12 +148,16 @@ async function deleteUser(id, name) {
                       </tr>
                     )
                   }
-                })
-              ) : (
-                <tr>Nenhum usuário cadastrado!</tr>
-              )}
+                })}
             </tbody>
           </Container>
+          <Pagination>
+            {pageRange.map((p) => (
+              <Numbers key={p} onClick={() => setPage(p)} disabled={p === page}>
+                {p + 1}
+              </Numbers>
+            ))}
+          </Pagination>
         </CenteredContainer>
       </div>
     </>

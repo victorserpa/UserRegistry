@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled, { keyframes } from "styled-components"
 
 export const CenteredContainer = styled.div`
   width: 100%;
@@ -8,8 +8,10 @@ export const CenteredContainer = styled.div`
   justify-content: center;
   align-items: center;
 
-  @media (max-width: 1120px) {
-    padding: 1rem;
+  @media (max-width: 768px) {
+    display: block;
+
+    /* margin-left: 15rem; */
   }
 `
 
@@ -65,13 +67,6 @@ export const Container = styled.table`
       }
     }
   }
-
-  @media (max-width: 1120px) {
-    td,
-    th {
-      padding: 1rem;
-    }
-  }
 `
 
 export const HeadingContainer = styled.div`
@@ -79,10 +74,6 @@ export const HeadingContainer = styled.div`
   align-items: center;
   margin: 0 auto;
   margin-top: 3rem;
-  @media (max-width: 1120px) {
-    flex-direction: column;
-    align-items: flex-end;
-  }
 `
 
 export const Heading = styled.h1`
@@ -90,42 +81,13 @@ export const Heading = styled.h1`
   font-size: 1.8rem;
   color: #000;
   text-align: center;
-
-  @media (max-width: 1120px) {
-    font-size: 1.5rem;
-  }
 `
-
-export const ButtonQuit = styled.button`
-  height: 50px;
-  border: 0;
-  background: ${(props) => props.theme["red-500"]};
-  color: ${(props) => props.theme.white};
-  font-weight: bold;
-  padding: 0 1.25rem;
-  border-radius: 0.9rem;
-  cursor: pointer;
-  margin: 1.5rem 12rem 1.5rem auto;
-
-  @media (max-width: 1120px) {
-    margin-top: 1.5rem;
-    margin-left: 0;
-    margin-right: auto;
-  }
-
-  &:hover {
-    background: ${(props) => props.theme["red-700"]};
-    transition: background-color 0.2s;
-  }
-`
-
-import { keyframes } from "styled-components"
 
 export const LoadingIndex = styled.div`
   z-index: 999;
   opacity: 1;
   width: 100%;
-  height: 100%;
+  height: 100em;
   position: absolute;
   background: ${(props) => props.theme["white"]};
   align-items: center;
@@ -135,16 +97,9 @@ export const LoadingWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  /* margin-left: 25rem; */
   margin-top: 20rem;
   padding: 0 1.5rem;
   color: ${(props) => props.theme["gray-900"]};
-
-  @media (max-width: 80rem) {
-    max-width: 100%;
-    margin: 0;
-    padding: 0;
-  }
 `
 
 export const BounceAnimation = keyframes`
@@ -169,4 +124,55 @@ export const Dot = styled.div`
   margin: 0 0.25rem;
   animation: ${BounceAnimation} 0.5s linear infinite;
   animation-delay: ${(props) => props.delay};
+`
+
+export const Pagination = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+export const Numbers = styled.div`
+  cursor: pointer;
+  gap: 0.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: ${(props) => props.theme["orange-SZ"]};
+
+  &.active {
+    background-color: ${(props) => props.theme["orange-SZ"]};
+    color: white;
+    border-radius: 0.25rem;
+    font-weight: bold;
+  }
+
+  &:not(.active) {
+    background-color: white;
+    border: 1px solid ${(props) => props.theme["orange-SZ"]};
+    border-radius: 0.25rem;
+    font-weight: bold;
+  }
+
+  &:not(:last-child) {
+    margin-right: 0.25rem;
+  }
+
+  &:hover {
+    background-color: ${(props) => props.theme["orange-SZ"]};
+    color: white;
+    border-radius: 0.25rem;
+    font-weight: bold;
+  }
+
+  &::disabled {
+    color: black;
+    transition: background-color 0.5s;
+  }
+  
+  @media (max-width: 768px) {
+    align-items: center;
+    justify-content: center;
+  }
 `
