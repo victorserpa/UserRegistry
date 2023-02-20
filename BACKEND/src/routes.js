@@ -2,6 +2,8 @@ const Router = require("express")
 const SessionController = require("./controllers/SessionController.js")
 const UserController = require("./controllers/UserController.js")
 const authMiddleware = require("./middlewares/auth.js")
+const multer = require("multer")
+const upload = multer({ dest: "uploads/" })
 
 const routes = new Router()
 
@@ -13,8 +15,12 @@ routes.put("/users/:login", UserController.updatePassword)
 routes.use(authMiddleware)
 
 routes.get("/users", authMiddleware, UserController.index)
+routes.get("/users/:id_user", UserController.show)
+routes.patch(
+  "/users/:id_user",
+  upload.single("avatar"),
+  UserController.updateUser
+)
 routes.delete("/users/:id_user", authMiddleware, UserController.delete)
-
-
 
 module.exports = routes

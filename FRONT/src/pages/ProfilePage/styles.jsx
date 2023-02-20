@@ -4,22 +4,31 @@ export const DivProfile = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  width: 100vw;
+  margin-top: 1rem;
 `
 
 export const CardProfileUser = styled.div`
   display: flex;
+  flex-direction: column;
   background: ${(props) => props.theme["gray-100"]};
-  width: 100vh;
-  height: 50vh;
+  width: 100%;
+  height: 100%;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 2rem;
+    width: auto;
+  }
 `
 
 export const ImageProfileUser = styled.div`
   display: grid;
-  width: 40vh;
+  width: 40%;
   justify-content: center;
   margin-top: 2.75rem;
+  margin-left: 4rem;
 
   #button {
     margin-top: 2rem;
@@ -44,18 +53,29 @@ export const ImageProfileUser = styled.div`
       background: ${(props) => props.theme["orange-SZ"]};
     }
   }
+
+  @media (max-width: 768px) {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 2rem;
+
+    #button {
+      margin-top: 1rem;
+      width: 100%;
+    }
+  }
 `
 
 export const ImagePR = styled.img`
   justify-content: center;
   align-items: center;
   width: 8em;
+  height: 8rem;
+  margin-left: 5rem;
   border-radius: 100%;
   border-style: solid;
   border-color: ${(props) => props.theme["orange-SZ"]};
 `
-
-export const ButtonProfile = styled.button``
 
 export const InfosProfileUser = styled.div`
   display: grid;
@@ -70,16 +90,14 @@ export const TrProfile = styled.div`
 `
 
 export const Form = styled.form`
-  width: 100%;
+  width: auto;
   display: grid;
   grid-template-columns: 50px 1fr;
-  margin: 2rem;
-
   align-items: center;
   justify-content: center;
 
   #number {
-    width: 100%;
+    width: auto;
     color: #000000;
     background-color: #97c6c126;
     border: 0;
@@ -91,6 +109,7 @@ export const Form = styled.form`
       outline: none;
       box-shadow: #82c0b9 0px 0px 2px 2px;
     }
+
     &:focus:invalid {
       outline: none;
       box-shadow: #b00020 0px 0px 2px 2px;
@@ -101,6 +120,7 @@ export const Form = styled.form`
     margin-top: 2rem;
     height: 4rem;
     width: 10rem;
+    margin-left: 4rem;
     border-style: none;
     border-radius: 120px;
     color: black;
@@ -121,15 +141,31 @@ export const Form = styled.form`
       background: ${(props) => props.theme["orange-SZ"]};
     }
   }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    grid-row-gap: 1.5rem;
+    width: auto;
+    
+    align-items: center;
+    justify-content: center;
+    #button {
+      margin-left: 0;
+    }
+    
+    #number {
+      width: 100%;
+    }
+  }
 `
 
 export const Input = styled.input`
-  width: 100%;
+  width: auto;
   color: #000000;
   background-color: #97c6c126;
   border: 0;
   margin-top: 0.75rem;
-
+  margin-left: 1rem;
   padding: 15px 10px 15px;
   box-sizing: border-box;
   border-radius: 0.5rem;
@@ -141,11 +177,23 @@ export const Input = styled.input`
     outline: none;
     box-shadow: #b00020 0px 0px 2px 2px;
   }
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    padding: 10px 5px 10px;
+    width: 100%;
+  }
 `
 
 export const Label = styled.label`
   color: #000000;
   font-size: 14px;
   margin-left: -3rem;
-  /* margin: 10rem; */
+  display: block;
+  margin-bottom: 0.5rem;
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    margin-top: 1rem;
+  }
 `

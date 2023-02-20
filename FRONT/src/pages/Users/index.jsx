@@ -112,7 +112,6 @@ export default function Users() {
         <CenteredContainer small>
           <HeadingContainer>
             <Heading>Usuários cadastrados</Heading>
-            
           </HeadingContainer>
           <Container>
             <tbody>
@@ -151,13 +150,19 @@ export default function Users() {
                 })}
             </tbody>
           </Container>
-          <Pagination>
-            {pageRange.map((p) => (
-              <Numbers key={p} onClick={() => setPage(p)} disabled={p === page}>
-                {p + 1}
-              </Numbers>
-            ))}
-          </Pagination>
+          {isAdmin && (
+            <Pagination>
+              {pageRange.map((p) => (
+                <Numbers
+                  key={p}
+                  onClick={() => setPage(p)}
+                  disabled={p === page}
+                >
+                  {p + 1}
+                </Numbers>
+              ))}
+            </Pagination>
+          )}
         </CenteredContainer>
       </div>
     </>

@@ -4,7 +4,7 @@ export const Container = styled.div`
 display: flex;
 align-items: center;
 justify-content: flex-end;
-width: 100vw;
+/* margin-left: 100rem; */
 `
 
 export const ButtonQuit = styled.button`
@@ -20,7 +20,7 @@ export const ButtonQuit = styled.button`
   
   justify-content: flex-end;
 
-  @media (max-width: 1120px) {
+  @media (max-width: 768px) {
     margin-top: 1.5rem;
     margin-left: 0;
     margin-right: auto;

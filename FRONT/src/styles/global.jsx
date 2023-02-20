@@ -18,6 +18,10 @@ color: ${(props) => props.theme["gray-300"]};
 background-image: url(${sz});
 background-size: cover;
 background-repeat: no-repeat;
+
+@media(max-width: 768px) {
+  background-size: 100%;
+}
 }
 
 body, input, textarea, button {

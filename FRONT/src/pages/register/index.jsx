@@ -55,7 +55,7 @@ export default function Register() {
       password,
     })
     if (error) {
-      setError("Erro ao se cadastrar, tente novamente !")
+      toast.error("Erro ao se cadastrar, tente novamente !")
     } else {
       setLogin("")
       setName("")
@@ -73,9 +73,7 @@ export default function Register() {
       toast.success("Usuário criado com sucesso!")
       return response.data
     } catch (error) {
-      toast.error("Erro ao cadastrar o usuário: " + error.response.data.error, {
-        position: toast.POSITION.TOP_RIGHT,
-      })
+      toast.error("Erro ao cadastrar o usuário")
     } finally {
       setSubmitting(false)
     }

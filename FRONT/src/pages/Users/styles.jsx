@@ -10,8 +10,6 @@ export const CenteredContainer = styled.div`
 
   @media (max-width: 768px) {
     display: block;
-
-    /* margin-left: 15rem; */
   }
 `
 
@@ -64,6 +62,33 @@ export const Container = styled.table`
         background-color: #f8d7da;
         color: #721c24;
         cursor: not-allowed;
+      }
+    }
+  }
+
+  @media(max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    td,
+    th {
+      padding: 0.5rem;
+      font-size: 0.9rem;
+
+      &:first-child {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+
+      &:last-child {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      #button {
+        width: 100%;
+        height: 2.5rem;
+        margin-bottom: 0.5rem;
       }
     }
   }
@@ -170,7 +195,7 @@ export const Numbers = styled.div`
     color: black;
     transition: background-color 0.5s;
   }
-  
+
   @media (max-width: 768px) {
     align-items: center;
     justify-content: center;

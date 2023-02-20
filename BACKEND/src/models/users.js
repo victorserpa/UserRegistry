@@ -14,6 +14,7 @@ class User extends Sequelize.Model {
           type: Sequelize.STRING,
           unique: true,
         },
+        avatar: Sequelize.STRING,
         name: Sequelize.STRING,
         telefone: Sequelize.STRING,
         email: Sequelize.STRING,

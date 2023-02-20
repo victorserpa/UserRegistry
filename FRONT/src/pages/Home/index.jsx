@@ -46,7 +46,6 @@ export default function HomePage() {
         password,
       })
       localStorage.setItem("token", data.token)
-
       window.location = "/home"
     } catch (err) {
       setSubmitting(false)

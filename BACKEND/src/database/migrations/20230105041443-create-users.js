@@ -7,7 +7,7 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
-      profilePhoto: {
+      avatar: {
         type: Sequelize.STRING,
         allowNull: true,
       },

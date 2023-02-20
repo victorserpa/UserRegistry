@@ -5,13 +5,13 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 `
 
 export const CardProfileUser = styled.div`
   color: black;
-  margin-top: -50vh;
+  margin-top: 5rem;
   align-items: center;
   
   width: 50vw;

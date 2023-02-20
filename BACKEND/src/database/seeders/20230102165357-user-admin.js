@@ -6,6 +6,7 @@ module.exports = {
       "users",
       [
         {
+          avatar: "",
           login: "admin",
           name: "admin",
           telefone: "123456789",

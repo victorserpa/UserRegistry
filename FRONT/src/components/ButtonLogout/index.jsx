@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom"
 import { ButtonQuit, Container } from "./styles"
 
 export default function Button(){
@@ -11,11 +10,11 @@ export default function Button(){
     
   return (
     <Container>
-      <Link onClick={logout}>
+      <div onClick={logout}>
         <ButtonQuit>
           <span>Sair</span>
         </ButtonQuit>
-      </Link>
+      </div>
     </Container>
   )
 }
