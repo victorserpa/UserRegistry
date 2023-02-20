@@ -57,7 +57,7 @@ class UserController {
         ],
       })
       return res.json(users)
-    }, 0)
+    }, 2000)
     return () => clearTimeout(timeout)
   }
 
