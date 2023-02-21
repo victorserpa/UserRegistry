@@ -5,7 +5,6 @@ import { useEffect, useState } from "react"
 import { useRef } from "react"
 import InputMask from "react-input-mask"
 import { toast } from "react-toastify"
-import UserAvatar from "../../components/ImgUser"
 import { Heading, HeadingContainer } from "../Users/styles"
 import {
   CardProfileUser,
