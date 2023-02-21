@@ -3,8 +3,6 @@ const Sequelize = require("sequelize")
 const User = require("../models/users.js")
 const bcrypt = require("bcryptjs")
 const multer = require("multer")
-const path = require("path")
-const { promisify } = require("util")
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -95,7 +93,6 @@ class UserController {
     if (!user) {
       return res.status(400).json({ error: "User not exists!" })
     }
-
     await user.destroy(req.params.id_user)
 
     return res.json({ message: "User excluded with success!" })

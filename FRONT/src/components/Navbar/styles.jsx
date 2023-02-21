@@ -38,7 +38,6 @@ export const ItensNavBar = styled.div`
     gap: 0.55rem;
     display: flex;
     align-items: center;
-    /* justify-content: center; */
     text-decoration: none;
     color: white;
 
@@ -79,6 +78,5 @@ export const ButtonNavBar = styled.button`
   @media (max-width: 768px) {
     display: block;
     color: ${props => props.theme["gray-900"]};
-    /* margin-left: 15rem; */
   }
 `

@@ -62,7 +62,6 @@ export default function ProfilePage() {
         setEmaill(userData.email)
         setPhone(userData.telefone)
         setAvatar(userData.avatar)
-        // setAvatar(`http://localhost:8081/uploads/${response.data.avatar}`)
       })
       .catch((error) => {
         console.error(error)
@@ -154,8 +153,6 @@ export default function ProfilePage() {
                 alt="Imagem do Usuário"
                 headers={getHeaders()}
               />
-              {/* <UserAvatar /> */}
-
               <Input
                 name="avatar"
                 type="file"

@@ -8,8 +8,6 @@ export default function HomeUser() {
   const currentUser = token ? jwtDecode(token) : ""
   const name = token ? currentUser.name : ""
   
-
-  
   useEffect(() => {
     toast.success(`Seja bem-vindo, ${name}`)
   }, [token])

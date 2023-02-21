@@ -5,9 +5,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import { ButtonNavBar, Div, ItensNavBar, UlNav } from "./styles"
 
-export default function NavBar() {
-  // const [navBarOpen, setNavBarOpen] = useState(true)
-  
+export default function NavBar() {  
   const dispatch = useDispatch()
   const navbarOpen = useSelector((state) => state.navbar.navbarOpen)
 
@@ -15,9 +13,6 @@ export default function NavBar() {
     dispatch(toggleNavbar())
   }
 
-  // const handleClickNavBar = () => {
-  //   setNavBarOpen(!navBarOpen)
-  // }
 
   return (
     <Div navBarOpen={navbarOpen}>
