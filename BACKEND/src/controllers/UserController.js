@@ -2,7 +2,6 @@ const Yup = require("yup")
 const Sequelize = require("sequelize")
 const User = require("../models/users.js")
 const bcrypt = require("bcryptjs")
-const multer = require("multer")
 
 class UserController {
   async store(req, res) {
