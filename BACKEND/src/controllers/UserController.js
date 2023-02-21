@@ -4,16 +4,6 @@ const User = require("../models/users.js")
 const bcrypt = require("bcryptjs")
 const multer = require("multer")
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "./uploads") // define o diretório onde o arquivo será salvo
-  },
-  filename: function (req, file, cb) {
-    const ext = file.mimetype.split("/")[1]
-    cb(null, "avatar-" + Date.now() + "." + ext) // define o nome do arquivo
-  },
-})
-
 class UserController {
   async store(req, res) {
     const schema = Yup.object().shape({
