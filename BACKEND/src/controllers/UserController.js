@@ -46,26 +46,6 @@ class UserController {
     })
   }
 
-  // async showAvatar(req, res) {
-  //   const { id_user } = req.params
-  //   try {
-  //     const user = await User.findOne({
-  //       where: { id_user: id_user },
-  //       attributes: ["avatar"],
-  //     })
-
-  //     if (!user) {
-  //       return res.status(404).json({ error: "User not found" })
-  //     }
-
-  //     const avatarUrl = `/uploads/${user.avatar}`
-
-  //     return res.json({ avatarUrl })
-  //   } catch (error) {
-  //     return res.status(500).json({ error: "Error retrieving user" })
-  //   }
-  // }
-
   async index(req, res) {
     const timeout = setTimeout(async () => {
       const { page = 1 } = req.query
