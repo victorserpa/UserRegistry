@@ -11,6 +11,7 @@ routes.get("/", (req, res) => res.json({ message: "Its OK!" }))
 routes.post("/login", SessionController.session)
 routes.post("/register", UserController.store)
 routes.put("/users/:login", UserController.updatePassword)
+// routes.get("/avatar/", UserController.showAvatar)
 
 routes.use(authMiddleware)
 

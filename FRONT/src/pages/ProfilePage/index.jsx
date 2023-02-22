@@ -49,7 +49,6 @@ export default function ProfilePage() {
 
   useEffect(() => {
     redirectUsers()
-
     axios
       .get(`http://localhost:8081/users/${currentUser.id_user}`, {
         headers: getHeaders(),
@@ -135,6 +134,32 @@ export default function ProfilePage() {
     setSubmitting(false)
   }
 
+  useEffect(() => {
+    if (submitting) {
+      const intervalId = setInterval(() => {
+        axios
+          .get(`http://localhost:8081/users/${currentUser.id_user}`, {
+            headers: getHeaders(),
+          })
+          .then((response) => {
+            const userData = response.data
+            setNames(userData.name)
+            setEmaill(userData.email)
+            setPhone(userData.telefone)
+            setAvatar(userData.avatar)
+            clearInterval(intervalId)
+          })
+          .catch((error) => {
+            console.error(error)
+            if (error.response.status === 401) {
+              window.location = "/"
+              localStorage.removeItem("token")
+            }
+          })
+      }, 5000)
+    }
+  }, [submitting, currentUser.id_user])
+
   return (
     <>
       <HeadingContainer>
@@ -147,7 +172,7 @@ export default function ProfilePage() {
             <ImageProfileUser>
               <ImagePR
                 id="image-preview"
-                src={`http://localhost:8081/uploads/${avatar}`}
+                src={avatar}
                 alt="Imagem do Usuário"
                 headers={getHeaders()}
               />

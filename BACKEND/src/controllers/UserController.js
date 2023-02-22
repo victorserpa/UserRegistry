@@ -2,6 +2,12 @@ const Yup = require("yup")
 const Sequelize = require("sequelize")
 const User = require("../models/users.js")
 const bcrypt = require("bcryptjs")
+const fs = require("fs")
+
+async function getImageBase64(filename) {
+  const file = fs.readFileSync(filename)
+  return Buffer.from(file).toString("base64")
+}
 
 class UserController {
   async store(req, res) {
@@ -39,6 +45,26 @@ class UserController {
       email,
     })
   }
+
+  // async showAvatar(req, res) {
+  //   const { id_user } = req.params
+  //   try {
+  //     const user = await User.findOne({
+  //       where: { id_user: id_user },
+  //       attributes: ["avatar"],
+  //     })
+
+  //     if (!user) {
+  //       return res.status(404).json({ error: "User not found" })
+  //     }
+
+  //     const avatarUrl = `/uploads/${user.avatar}`
+
+  //     return res.json({ avatarUrl })
+  //   } catch (error) {
+  //     return res.status(500).json({ error: "Error retrieving user" })
+  //   }
+  // }
 
   async index(req, res) {
     const timeout = setTimeout(async () => {
@@ -87,31 +113,36 @@ class UserController {
     return res.json({ message: "User excluded with success!" })
   }
 
-  async show(req, res) {
-    const { id_user } = req.params
-    try {
-      const user = await User.findOne({
-        where: { id_user: id_user },
-        attributes: [
-          "id_user",
-          "login",
-          "name",
-          "telefone",
-          "email",
-          "birthday",
-          "avatar",
-        ],
-      })
+async show(req, res) {
+  const { id_user } = req.params;
+  try {
+    const user = await User.findOne({
+      where: { id_user: id_user },
+      attributes: [
+        "id_user",
+        "login",
+        "name",
+        "telefone",
+        "email",
+        "birthday",
+        "avatar",
+      ],
+    });
 
-      if (!user) {
-        return res.status(404).json({ error: "User not found" })
-      }
-
-      return res.json(user)
-    } catch (error) {
-      return res.status(500).json({ error: "Error retrieving user" })
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
     }
+
+    if (user.avatar) {
+      const base64Image = await getImageBase64(`./uploads/${user.avatar}`);
+      user.avatar = `data:image/jpeg;base64,${base64Image}`;
+    }
+
+    return res.json(user);
+  } catch (error) {
+    return res.status(500).json({ error: "Error retrieving user" });
   }
+}
 
   async updateUser(req, res) {
     const { id_user } = req.params
