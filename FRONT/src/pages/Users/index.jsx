@@ -47,6 +47,7 @@ export default function Users() {
   const redirectUsers = () => {
     if (!token) {
       window.location = "/"
+      localStorage.removeItem("token")
     }
   }
 
@@ -66,9 +67,6 @@ export default function Users() {
       })
   }
 
-  const numPages = Math.ceil(users.length / 5)
-  const pageRange = Array.from({ length: numPages }, (_, i) => i)
-
   async function deleteUser(id, name) {
     if (currentUser.id_user === id) {
       toast.error("Você não pode excluir você mesmo.")
@@ -85,7 +83,7 @@ export default function Users() {
           axios
             .get("http://localhost:8081/users", { headers: getHeaders() })
             .then((response) => {
-              setUser(response.data)
+              setUsers(response.data)
               toast.success(`Usuário excluído com sucesso!`)
             })
             .catch((error) => {
@@ -104,7 +102,32 @@ export default function Users() {
     }
   }
 
+  function listUser() {
+    const userList = !isAdmin
+      ? [users.find((elem) => currentUser.id_user === elem.id_user)]
+      : [...users.slice(page * 5, (page + 1) * 5)]
+    return userList.map((user) => (
+      <tr key={user.id_user}>
+        <td width="35%">{user.name}</td>
+        <td>{user.login}</td>
+        <td>{user.email}</td>
+        <td width="25%">{user.telefone}</td>
+        <th>
+          <button
+            id="button"
+            key={user.id_user}
+            onClick={() => deleteUser(user.id_user)}
+            disabled={isAdmin !== true}
+          >
+            Excluir
+          </button>
+        </th>
+      </tr>
+    ))
+  }
 
+  const numPages = Math.ceil(users.length / 5)
+  const pageRange = Array.from({ length: numPages }, (_, i) => i)
 
   return (
     <>
@@ -122,35 +145,10 @@ export default function Users() {
                 <th id="header">Telefone</th>
                 <th id="header">Apagar usuário</th>
               </tr>
-              {users.length > 0 &&
-                users.slice(page * 5, (page + 1) * 5).map((user) => {
-                  if (
-                    isAdmin === true ||
-                    currentUser.id_user === user.id_user
-                  ) {
-                    return (
-                      <tr key={user.id_user}>
-                        <td width="35%">{user.name}</td>
-                        <td>{user.login}</td>
-                        <td>{user.email}</td>
-                        <td width="25%">{user.telefone}</td>
-                        <th>
-                          <button
-                            id="button"
-                            key={user.id_user}
-                            onClick={() => deleteUser(user.id_user)}
-                            disabled={isAdmin !== true}
-                          >
-                            Excluir
-                          </button>
-                        </th>
-                      </tr>
-                    )
-                  }
-                })}
+              {users && users.length > 0 && listUser()  }
             </tbody>
           </Container>
-          {isAdmin && (
+          {isAdmin && users.length > 5 ? (
             <Pagination>
               {pageRange.map((p) => (
                 <Numbers
@@ -162,6 +160,8 @@ export default function Users() {
                 </Numbers>
               ))}
             </Pagination>
+          ) : (
+            ""
           )}
         </CenteredContainer>
       </div>

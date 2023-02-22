@@ -48,10 +48,7 @@ class UserController {
 
   async index(req, res) {
     const timeout = setTimeout(async () => {
-      const { page = 1 } = req.query
       const users = await User.findAll({
-        limit: 10,
-        offset: (page - 1) * 10,
         order: ["name"],
         attributes: [
           "id_user",
@@ -93,36 +90,36 @@ class UserController {
     return res.json({ message: "User excluded with success!" })
   }
 
-async show(req, res) {
-  const { id_user } = req.params;
-  try {
-    const user = await User.findOne({
-      where: { id_user: id_user },
-      attributes: [
-        "id_user",
-        "login",
-        "name",
-        "telefone",
-        "email",
-        "birthday",
-        "avatar",
-      ],
-    });
+  async show(req, res) {
+    const { id_user } = req.params
+    try {
+      const user = await User.findOne({
+        where: { id_user: id_user },
+        attributes: [
+          "id_user",
+          "login",
+          "name",
+          "telefone",
+          "email",
+          "birthday",
+          "avatar",
+        ],
+      })
 
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
+      if (!user) {
+        return res.status(404).json({ error: "User not found" })
+      }
+
+      if (user.avatar) {
+        const base64Image = await getImageBase64(`./uploads/${user.avatar}`)
+        user.avatar = `data:image/jpeg;base64,${base64Image}`
+      }
+
+      return res.json(user)
+    } catch (error) {
+      return res.status(500).json({ error: "Error retrieving user" })
     }
-
-    if (user.avatar) {
-      const base64Image = await getImageBase64(`./uploads/${user.avatar}`);
-      user.avatar = `data:image/jpeg;base64,${base64Image}`;
-    }
-
-    return res.json(user);
-  } catch (error) {
-    return res.status(500).json({ error: "Error retrieving user" });
   }
-}
 
   async updateUser(req, res) {
     const { id_user } = req.params
