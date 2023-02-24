@@ -35,6 +35,8 @@ export const ItensNavBar = styled.div`
 
   #navBar {
     border-color: green !important;
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
     gap: 0.55rem;
     display: flex;
     align-items: center;
@@ -53,6 +55,7 @@ export const ItensNavBar = styled.div`
 
   #iconNavbar {
     margin-left: 112px;
+    margin-bottom: 0.75rem;
     display: flex;
     align-items: center;
     justify-content: center;

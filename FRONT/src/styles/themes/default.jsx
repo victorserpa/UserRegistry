@@ -2,7 +2,7 @@ export const defaultTheme = {
   white: "#fff",
 
   "orange-SZ": "#fc5c04",
-  "orange-SZ-Hover": "#ca4a05",
+  "orangeHover": "#ca4a05",
   "gray-100": "#E1E1E6",
   "gray-300": "#C4C4CC",
   "gray-400": "#8D8D99",

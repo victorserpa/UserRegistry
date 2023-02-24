@@ -10,7 +10,7 @@ export const DivProfile = styled.div`
 export const CardProfileUser = styled.div`
   display: flex;
   flex-direction: column;
-  background: ${(props) => props.theme["gray-100"]};
+  background: ${(props) => props.theme["white"]};
   width: 100%;
   height: 100%;
 
@@ -25,7 +25,7 @@ export const CardProfileUser = styled.div`
 
 export const ImageProfileUser = styled.div`
   display: grid;
-  width: 40%;
+  /* width: 40%; */
   justify-content: center;
   margin-top: 2.75rem;
   margin-left: 4rem;
@@ -35,16 +35,16 @@ export const ImageProfileUser = styled.div`
     height: 2rem;
     border-style: none;
     border-radius: 120px;
-    color: black;
+    color: ${(props) => props.theme["white"]};
     background: ${(props) => props.theme["orange-SZ"]};
 
     &:focus {
       outline: none;
-      box-shadow: #82c0b9 0px 0px 2px 2px;
+      box-shadow: #6fa49e 0px 0px 2px 2px;
     }
 
     &:hover {
-      background: ${(props) => props.theme["orange-SZ-Hover"]};
+      background: ${(props) => props.theme["orangeHover"]};
       transition: background-color 0.5s;
     }
 
@@ -69,9 +69,9 @@ export const ImageProfileUser = styled.div`
 export const ImagePR = styled.img`
   justify-content: center;
   align-items: center;
-  width: 8em;
+  width: 8rem;
   height: 8rem;
-  margin-left: 5rem;
+  margin-left: 7.75rem;
   border-radius: 100%;
   border-style: solid;
   border-color: ${(props) => props.theme["orange-SZ"]};
@@ -99,10 +99,11 @@ export const Form = styled.form`
   #number {
     width: auto;
     color: #000000;
-    background-color: #97c6c126;
+    background-color: #556e6c24;
     border: 0;
-    margin-top: 0.75em;
-    padding: 1em;
+    margin-top: 0.75rem;
+    margin-left: 1rem;
+    padding: 15px 10px 15px;
     box-sizing: border-box;
     border-radius: 0.5rem;
     &:focus {
@@ -123,7 +124,7 @@ export const Form = styled.form`
     margin-left: 4rem;
     border-style: none;
     border-radius: 120px;
-    color: black;
+    color: ${(props) => props.theme["white"]};
     background: ${(props) => props.theme["orange-SZ"]};
 
     &:focus {
@@ -132,7 +133,7 @@ export const Form = styled.form`
     }
 
     &:hover {
-      background: ${(props) => props.theme["orange-SZ-Hover"]};
+      background: ${(props) => props.theme["orangeHover"]};
       transition: background-color 0.5s;
     }
 
@@ -146,13 +147,13 @@ export const Form = styled.form`
     grid-template-columns: 1fr;
     grid-row-gap: 1.5rem;
     width: auto;
-    
+
     align-items: center;
     justify-content: center;
     #button {
       margin-left: 0;
     }
-    
+
     #number {
       width: 100%;
     }
@@ -162,13 +163,17 @@ export const Form = styled.form`
 export const Input = styled.input`
   width: auto;
   color: #000000;
-  background-color: #97c6c126;
+  background-color: #556e6c24;
   border: 0;
   margin-top: 0.75rem;
   margin-left: 1rem;
   padding: 15px 10px 15px;
   box-sizing: border-box;
   border-radius: 0.5rem;
+  
+  align-items: center;
+  justify-content: center;
+  
   &:focus {
     outline: none;
     box-shadow: #82c0b9 0px 0px 2px 2px;
@@ -191,6 +196,8 @@ export const Label = styled.label`
   margin-left: -3rem;
   display: block;
   margin-bottom: 0.5rem;
+  align-items: center;
+  justify-content: center;
 
   @media (max-width: 768px) {
     margin-left: 0;

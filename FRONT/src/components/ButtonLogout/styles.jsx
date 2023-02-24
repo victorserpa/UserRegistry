@@ -4,6 +4,7 @@ export const Container = styled.div`
 display: flex;
 align-items: center;
 justify-content: flex-end;
+height: 4rem;
 `
 
 export const ButtonQuit = styled.button`
@@ -16,6 +17,7 @@ export const ButtonQuit = styled.button`
   border-radius: 0.9rem;
   cursor: pointer;
   margin: 1.5rem 12rem 1.5rem auto;
+  margin-top: 3rem;
   
   justify-content: flex-end;
 

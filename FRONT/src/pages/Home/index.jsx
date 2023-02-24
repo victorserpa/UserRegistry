@@ -17,7 +17,6 @@ import {
   Label,
 } from "./styles"
 import { toast } from "react-toastify"
-import { useSelector } from "react-redux"
 
 export default function HomePage() {
   const [login, setLogin] = useState("")
@@ -46,7 +45,10 @@ export default function HomePage() {
         password,
       })
       localStorage.setItem("token", data.token)
-      window.location = "/home"
+      toast.success("Login efetuado com sucesso!")
+      setTimeout(() => {
+        window.location = "/home"
+      }, 1000)
     } catch (err) {
       setSubmitting(false)
       toast.error("Login e/ou Senha incorreta!")

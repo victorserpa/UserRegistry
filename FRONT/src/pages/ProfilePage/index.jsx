@@ -84,7 +84,15 @@ export default function ProfilePage() {
   }
 
   const handleImageChange = (e) => {
-    setAvatar(e.target.files.item(0))
+    const file = e.target.files.item(0)
+    const allowedTypes = ["image/jpeg", "image/png"]
+    if (file && allowedTypes.includes(file.type)) {
+      setAvatar(file)
+    } else {
+      alert("Por favor, selecione um arquivo JPEG ou PNG.")
+      // Limpe o valor do input de arquivo para evitar o upload do arquivo inválido
+      e.target.value = null
+    }
   }
 
   const handleSubmit = async (e) => {
@@ -180,6 +188,7 @@ export default function ProfilePage() {
                 name="avatar"
                 type="file"
                 id="image"
+                accept="image/jpeg, image/png, image/jpg"
                 onChange={handleImageChange}
                 disabled={!editable}
               />

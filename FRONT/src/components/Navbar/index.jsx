@@ -20,37 +20,37 @@ export default function NavBar() {
         {navbarOpen ? (
           <ItensNavBar>
             <Link to="/home" id="navBar">
-              <House size={20} weight="bold" />
+              <House size={21} weight="bold" />
               Home
             </Link>
             <Link to="users" id="navBar">
-              <List size={20} weight="bold" />
+              <List size={21} weight="bold" />
               Usuários
             </Link>
             <Link to="profile" id="navBar">
-              <User size={20} />
+              <User size={21} />
               Seus Dados
             </Link>
           </ItensNavBar>
         ) : (
           <ItensNavBar>
             <Link to="/home" id="iconNavbar">
-              <House size={20} />
+              <House size={25} />
             </Link>
             <Link to="users" id="iconNavbar">
-              <List size={20} />
+              <List size={25} />
             </Link>
             <Link to="profile" id="iconNavbar">
-              <User size={20} />
+              <User size={25} />
             </Link>
           </ItensNavBar>
         )}
 
         <ButtonNavBar onClick={handleClickNavBar}>
           {navbarOpen ? (
-            <CaretDoubleLeft size={20} weight="thin" />
+            <CaretDoubleLeft size={21} weight="thin" />
           ) : (
-            <CaretDoubleRight size={20} weight="thin" />
+            <CaretDoubleRight size={25} weight="bold" />
           )}
         </ButtonNavBar>
       </UlNav>

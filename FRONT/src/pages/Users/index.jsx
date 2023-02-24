@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import axios from "axios"
 import jwtDecode from "jwt-decode"
 import { toast } from "react-toastify"
@@ -9,22 +9,20 @@ import {
   Heading,
   Container,
   HeadingContainer,
-  Pagination,
-  Numbers,
+  Paginate,
+  Selector,
 } from "../Users/styles"
 
 import { setIsLoading } from "../../store/actions"
 
 export default function Users() {
   const [users, setUsers] = useState([])
-  const [page, setPage] = useState(0)
+  const [perPage, setPerPage] = useState(5)
+  const [currentPage, setCurrentPage] = useState(0)
   const token = localStorage.getItem("token") || null
   const dispatch = useDispatch()
-  const isLoading = useSelector((state) => state.loading)
   const currentUser = token ? jwtDecode(token) : ""
   const isAdmin = token ? currentUser.admin : ""
-  const name = token ? currentUser.name : ""
-  let toastDisplayed = false
 
   useEffect(() => {
     redirectUsers()
@@ -63,7 +61,9 @@ export default function Users() {
         }
       })
       .finally(() => {
-        loaded()
+        {
+          users.length <= 0 ? loaded() : ""
+        }
       })
   }
 
@@ -103,9 +103,11 @@ export default function Users() {
   }
 
   function listUser() {
+    const start = currentPage * perPage
+    const end = start + perPage
     const userList = !isAdmin
       ? [users.find((elem) => currentUser.id_user === elem.id_user)]
-      : [...users.slice(page * 5, (page + 1) * 5)]
+      : [...users.slice(start, end)]
     return userList.map((user) => (
       <tr key={user.id_user}>
         <td width="35%">{user.name}</td>
@@ -119,15 +121,20 @@ export default function Users() {
             onClick={() => deleteUser(user.id_user)}
             disabled={isAdmin !== true}
           >
-            Excluir
+            Apagar
           </button>
         </th>
       </tr>
     ))
   }
 
-  const numPages = Math.ceil(users.length / 5)
-  const pageRange = Array.from({ length: numPages }, (_, i) => i)
+  const numPages = Math.ceil(users.length / perPage)
+
+  const handlePerPageChange = (e) => {
+    const newPerPage = parseInt(e.target.value)
+    setPerPage(newPerPage)
+    setCurrentPage(0)
+  }
 
   return (
     <>
@@ -136,30 +143,49 @@ export default function Users() {
           <HeadingContainer>
             <Heading>Usuários cadastrados</Heading>
           </HeadingContainer>
+          {currentUser.admin == isAdmin ? (
+            <Selector
+              id="per-page"
+              value={perPage}
+              onChange={handlePerPageChange}
+            >
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+              <option value="20">20</option>
+              <option value="25">25</option>
+            </Selector>
+          ) : (
+            ""
+          )}
           <Container>
             <tbody>
               <tr>
-                <td id="header">Nome do usuário</td>
+                <td width="35%" id="header">
+                  Nome do usuário
+                </td>
                 <th id="header">Login</th>
                 <th id="header">E-mail</th>
                 <th id="header">Telefone</th>
-                <th id="header">Apagar usuário</th>
+                <th width="25%" id="header">
+                  Apagar usuário
+                </th>
               </tr>
-              {users && users.length > 0 && listUser()  }
+              {users && users.length > 0 && listUser()}
             </tbody>
           </Container>
-          {isAdmin && users.length > 5 ? (
-            <Pagination>
-              {pageRange.map((p) => (
-                <Numbers
-                  key={p}
-                  onClick={() => setPage(p)}
-                  disabled={p === page}
-                >
-                  {p + 1}
-                </Numbers>
-              ))}
-            </Pagination>
+          {isAdmin && users.length > perPage ? (
+            <Paginate
+              pageCount={numPages}
+              onPageChange={(data) => setCurrentPage(data.selected)}
+              containerClassName={"pagination"}
+              activeClassName={"active"}
+              previousLabel={"Voltar"}
+              nextLabel={"Avançar"}
+              breakClassName={"break"}
+              marginPagesDisplayed={1}
+              pageRangeDisplayed={5}
+            />
           ) : (
             ""
           )}

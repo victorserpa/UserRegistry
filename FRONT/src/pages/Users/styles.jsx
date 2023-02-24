@@ -1,10 +1,10 @@
+import ReactPaginate from "react-paginate"
 import styled, { keyframes } from "styled-components"
 
 export const CenteredContainer = styled.div`
   width: 100%;
   max-width: 1120px;
   margin: 0 auto;
-  padding: 2rem;
   justify-content: center;
   align-items: center;
 
@@ -14,7 +14,8 @@ export const CenteredContainer = styled.div`
 `
 
 export const Container = styled.table`
-  width: 100%;
+  height: 28rem;
+  overflow-y: auto;
   border-collapse: separate;
   border-spacing: 0 0.5rem;
   display: block;
@@ -22,6 +23,7 @@ export const Container = styled.table`
   margin: 0 auto;
   color: #000000;
   text-align: center;
+  margin-bottom: 2rem;
 
   #header {
     font-weight: bold;
@@ -66,7 +68,7 @@ export const Container = styled.table`
     }
   }
 
-  @media(max-width: 768px) {
+  @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
     padding: 0;
@@ -151,53 +153,30 @@ export const Dot = styled.div`
   animation-delay: ${(props) => props.delay};
 `
 
-export const Pagination = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
-
-export const Numbers = styled.div`
+export const Paginate = styled(ReactPaginate).attrs({
+  activeClassName: "active",
+})`
   cursor: pointer;
-  gap: 0.3rem;
+  gap: 0.7rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  list-style: none;
 
   color: ${(props) => props.theme["orange-SZ"]};
-
-  &.active {
-    background-color: ${(props) => props.theme["orange-SZ"]};
-    color: white;
-    border-radius: 0.25rem;
-    font-weight: bold;
-  }
-
-  &:not(.active) {
-    background-color: white;
-    border: 1px solid ${(props) => props.theme["orange-SZ"]};
-    border-radius: 0.25rem;
-    font-weight: bold;
-  }
-
-  &:not(:last-child) {
-    margin-right: 0.25rem;
-  }
-
-  &:hover {
-    background-color: ${(props) => props.theme["orange-SZ"]};
-    color: white;
-    border-radius: 0.25rem;
-    font-weight: bold;
-  }
-
-  &::disabled {
-    color: black;
-    transition: background-color 0.5s;
-  }
-
-  @media (max-width: 768px) {
-    align-items: center;
-    justify-content: center;
-  }
+`
+export const Selector = styled.select`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  padding: 0 15px;
+  font-size: 13px;
+  line-height: 1;
+  height: 35px;
+  gap: 5px;
+  background: white;
+  border: none;
+  color: ${(props) => props.theme["orange-SZ"]};
+  box-shadow: 0 2px 10px ${(props) => props.theme["gray-400"]};
 `

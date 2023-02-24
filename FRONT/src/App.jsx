@@ -7,7 +7,6 @@ import { defaultTheme } from "./styles/themes/default"
 import store from "./store"
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.min.css"
-import Loaded from "./components/Loaded"
 import Load from "./components/Loaded"
 
 
