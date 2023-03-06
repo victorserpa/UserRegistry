@@ -14,7 +14,7 @@ export const CenteredContainer = styled.div`
 `
 
 export const Container = styled.table`
-  height: 28rem;
+  height: 30rem;
   overflow-y: auto;
   border-collapse: separate;
   border-spacing: 0 0.5rem;
